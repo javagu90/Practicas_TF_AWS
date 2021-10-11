@@ -1,0 +1,19 @@
+provider "aws" {
+    region = "us-west-1"
+}
+
+#resource "aws_instance" "test" {
+#  ami = "ami-054965c6cd7c6e462"
+#  instance_type = "t2.micro"
+#}
+
+#creando VPC
+
+resource "aws_vpc" "main"{
+  cidr_block="10.0.0.0/16"
+  enable_dns_hostnames = true
+
+  tags ={
+    name ="vpc1"
+  }
+}
