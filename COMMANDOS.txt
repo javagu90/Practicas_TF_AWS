@@ -1,0 +1,2 @@
+COLOCARSE EN EL .AWS y dar terraform init
+
