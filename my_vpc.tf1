@@ -1,6 +1,4 @@
-provider "aws" {
-    region = "us-west-1"
-}
+
 
 #resource "aws_instance" "test" {
 #  ami = "ami-054965c6cd7c6e462"
