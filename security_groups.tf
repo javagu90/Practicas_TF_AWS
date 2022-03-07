@@ -1,6 +1,6 @@
-#provider "aws" {
- #   region = "us-west-1"
-#}
+provider "aws" {
+    region = "${var.region}"
+}
 
 #resource "aws_instance" "test" {
 #  ami = "ami-054965c6cd7c6e462"
@@ -10,7 +10,7 @@
 #creando VPC
 
 resource "aws_vpc" "main"{
-  cidr_block="10.0.0.0/16"
+  cidr_block="${var.vpc_cidr}"
   enable_dns_hostnames = true
 
   tags ={
@@ -21,9 +21,9 @@ resource "aws_vpc" "main"{
 #creando subnets
 resource "aws_subnet" "subnet1" {
   vpc_id = "${aws_vpc.main.id}"
-  cidr_block="10.0.10.0/24"
+  cidr_block="${var.subnet1_cidr}"
   map_public_ip_on_launch = true
-  availability_zone = "us-west-1b"
+  availability_zone = "${var.subnet1_zone_1b}" #"us-west-1b"
   tags={
     Name = "subnet1 en us-west-1b" 
   }  
@@ -31,9 +31,9 @@ resource "aws_subnet" "subnet1" {
 
 resource "aws_subnet" "subnet2" {
   vpc_id = "${aws_vpc.main.id}"
-  cidr_block="10.0.20.0/24"
+  cidr_block="${var.subnet2_cidr}"
   map_public_ip_on_launch = true
-  availability_zone = "us-west-1c"
+  availability_zone = "${var.subnet2_zone_1c}" #"us-west-1c"
   tags={
     Name = "subnet2 en us-west-1c" 
   }  

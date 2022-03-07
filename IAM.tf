@@ -1,6 +1,6 @@
-provider "aws" {
-    region = "us-west-1"
-}
+#provider "aws" {
+ #   region = "${var.region}"
+#}
 
 #IAM ACCESS
 resource "aws_iam_group" "administradores" {
