@@ -2,12 +2,14 @@ resource "aws_instance" "server1" {
   ami = "${var.ami_id}"
   #terraform plan -var="ami_id=ami-054965c6cd7c6e462 NO ES EL METODO CORRECTO
   instance_type = "t2.micro"
-  count = 1
+  #count = 3
+  count ="${length(var.subnet1_private_ip)}"
   subnet_id = "${aws_subnet.subnet1.id}" #mejor manera
   associate_public_ip_address = true
   vpc_security_group_ids = ["${aws_security_group.sg-1.id}", "${aws_security_group.sg-2.id}"]
   #vpc_security_group_ids = [ "sg-0d578a793fff6230a", "sg-08695b6d6f39a6be3" ]
-  private_ip = "${var.subnet1_private_ip}"
+  #private_ip = "${var.subnet1_private_ip}"
+  private_ip = "${element(var.subnet1_private_ip, count.index)}"
   key_name = "llaves" #${aws_key_pair.llaves.id}"    
   #comando para entrar ssh -i llaves.pem ec2-user@ec2-13-52-187-138.us-west-1.compute.amazonaws.com
 
@@ -15,7 +17,7 @@ resource "aws_instance" "server1" {
   user_data = "${file("userdata.sh")}"
   
   tags = {
-    "Name" = "server1"
+    "Name" = "server - ${count.index+1}"
     "Owner" = "terraform"
     "Env" = "Dev"
   }

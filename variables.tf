@@ -33,6 +33,13 @@ variable "subnet2_zone_1c" {
   #default = "us-west-1c"
 }
 
-variable "subnet1_private_ip" {
-  description = "IP privada de la instancia"
+#variable "subnet1_private_ip" {
+ # description = "IP privada de la instancia"
+#}
+#######################
+
+variable "subnet1_private_ip"{
+  description = "Lista de IP para subnet 1"
+  type = list
+  default = ["192.168.10.11","192.168.10.12","192.168.10.13"]
 }
